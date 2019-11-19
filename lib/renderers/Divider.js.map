@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Divider.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Divider.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,sCAAmD;AASnD;IAAqC,mCAAqC;IAA1E;;IAkBA,CAAC;IAZC,wBAAM,GAAN;QACQ,IAAA,eAAmD,EAAlD,kBAAc,EAAE,wBAAS,EAAE,wBAAuB,CAAC;QAC1D,OAAO,CACL,uCACE,SAAS,EAAE,EAAE,CACX,SAAS,EACT,SAAS,CAAC,CAAC,CAAC,cAAY,SAAW,CAAC,CAAC,CAAC,EAAE,EACxC,SAAS,CACV,GACD,CACH,CAAC;IACJ,CAAC;IAhBM,oBAAY,GAAkD;QACnE,SAAS,EAAE,EAAE;QACb,SAAS,EAAE,QAAQ;KACpB,CAAC;IAcJ,cAAC;CAAA,AAlBD,CAAqC,eAAK,CAAC,SAAS,GAkBnD;kBAlBoB,OAAO;AAwB5B;IAAqC,2CAAO;IAA5C;;IAA8C,CAAC;IAAlC,eAAe;QAJ3B,kBAAQ,CAAC;YACR,IAAI,EAAE,uBAAuB;YAC7B,IAAI,EAAE,SAAS;SAChB,CAAC;OACW,eAAe,CAAmB;IAAD,sBAAC;CAAA,AAA/C,CAAqC,OAAO,GAAG;AAAlC,0CAAe",
+    "sourcesContent": [
+        "import React from 'react';\nimport {Renderer, RendererProps} from '../factory';\nimport {ServiceStore, IServiceStore} from '../store/service';\nimport {filter} from '../utils/tpl';\nimport cx from 'classnames';\n\nexport interface DividerProps extends RendererProps {\n  lineStyle: 'dashed' | 'solid';\n}\n\nexport default class Divider extends React.Component<DividerProps, object> {\n  static defaultProps: Pick<DividerProps, 'className' | 'lineStyle'> = {\n    className: '',\n    lineStyle: 'dashed'\n  };\n\n  render() {\n    const {classnames: cx, className, lineStyle} = this.props;\n    return (\n      <div\n        className={cx(\n          'Divider',\n          lineStyle ? `Divider--${lineStyle}` : '',\n          className\n        )}\n      />\n    );\n  }\n}\n\n@Renderer({\n  test: /(^|\\/)(?:divider|hr)$/,\n  name: 'divider'\n})\nexport class DividerRenderer extends Divider {}\n"
+    ]
+}

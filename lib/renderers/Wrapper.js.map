@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Wrapper.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Wrapper.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,sCAAmD;AAWnD;IAAqC,mCAAqC;IAA1E;;IA2BA,CAAC;IArBC,4BAAU,GAAV;QACQ,IAAA,eAAqC,EAApC,sBAAQ,EAAE,cAAI,EAAE,kBAAoB,CAAC;QAE5C,OAAO,QAAQ;YACb,CAAC,CAAC,OAAO,QAAQ,KAAK,UAAU;gBAC9B,CAAC,CAAE,QAAQ,CAAC,IAAI,CAAC,KAAK,CAAiB;gBACvC,CAAC,CAAE,QAAwB;YAC7B,CAAC,CAAC,IAAI;gBACN,CAAC,CAAE,MAAM,CAAC,MAAM,EAAE,IAAI,CAAiB;gBACvC,CAAC,CAAC,IAAI,CAAC;IACX,CAAC;IAED,wBAAM,GAAN;QACQ,IAAA,eAA8C,EAA7C,wBAAS,EAAE,cAAI,EAAE,kBAA4B,CAAC;QAErD,OAAO,CACL,uCAAK,SAAS,EAAE,EAAE,CAAC,SAAS,EAAE,IAAI,CAAC,CAAC,CAAC,cAAY,IAAM,CAAC,CAAC,CAAC,EAAE,EAAE,SAAS,CAAC,IACrE,IAAI,CAAC,UAAU,EAAE,CACd,CACP,CAAC;IACJ,CAAC;IAzBM,iBAAS,GAAkB,CAAC,MAAM,EAAE,WAAW,EAAE,UAAU,EAAE,MAAM,CAAC,CAAC;IACrE,oBAAY,GAA0B;QAC3C,SAAS,EAAE,UAAU;KACtB,CAAC;IAuBJ,cAAC;CAAA,AA3BD,CAAqC,eAAK,CAAC,SAAS,GA2BnD;kBA3BoB,OAAO;AAiC5B;IAAqC,2CAAO;IAA5C;;IAA8C,CAAC;IAAlC,eAAe;QAJ3B,kBAAQ,CAAC;YACR,IAAI,EAAE,gBAAgB;YACtB,IAAI,EAAE,SAAS;SAChB,CAAC;OACW,eAAe,CAAmB;IAAD,sBAAC;CAAA,AAA/C,CAAqC,OAAO,GAAG;AAAlC,0CAAe",
+    "sourcesContent": [
+        "import React from 'react';\nimport {Renderer, RendererProps} from '../factory';\nimport {SchemaNode} from '../types';\nimport cx from 'classnames';\n\nexport interface WrapperProps extends RendererProps {\n  body?: SchemaNode;\n  className?: string;\n  children?: JSX.Element | ((props?: any) => JSX.Element);\n  size?: 'xs' | 'sm' | 'md' | 'lg' | 'none';\n}\n\nexport default class Wrapper extends React.Component<WrapperProps, object> {\n  static propsList: Array<string> = ['body', 'className', 'children', 'size'];\n  static defaultProps: Partial<WrapperProps> = {\n    className: 'bg-white'\n  };\n\n  renderBody(): JSX.Element | null {\n    const {children, body, render} = this.props;\n\n    return children\n      ? typeof children === 'function'\n        ? (children(this.props) as JSX.Element)\n        : (children as JSX.Element)\n      : body\n      ? (render('body', body) as JSX.Element)\n      : null;\n  }\n\n  render() {\n    const {className, size, classnames: cx} = this.props;\n\n    return (\n      <div className={cx('Wrapper', size ? `Wrapper--${size}` : '', className)}>\n        {this.renderBody()}\n      </div>\n    );\n  }\n}\n\n@Renderer({\n  test: /(^|\\/)wrapper$/,\n  name: 'wrapper'\n})\nexport class WrapperRenderer extends Wrapper {}\n"
+    ]
+}

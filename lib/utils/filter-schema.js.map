@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "filter-schema.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/utils/filter-schema.ts"
+    ],
+    "names": [],
+    "mappings": ";;AAAA,6BAA6C;AAI7C;;;;;;;;;GASG;AACH,SAAwB,iBAAiB,CACvC,MAAmB,EACnB,IAAiB,EACjB,SAAoC;IADpC,qBAAA,EAAA,SAAiB;IACjB,0BAAA,EAAA,aAA4B,OAAO,CAAC;IAEpC,IAAM,SAAS,GAAgB,EAAE,CAAC;IAElC,MAAM,CAAC,mBAAmB,CAAC,MAAM,CAAC,CAAC,OAAO,CAAC,UAAA,GAAG;QAC5C,IAAI,SAAS,IAAI,CAAC,SAAS,CAAC,OAAO,CAAC,GAAG,CAAC,EAAE;YACxC,OAAO;SACR;QAED,IAAI,KAAK,GAAG,iBAAiB,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC;QACxC,IAAI,KAAK,GAAQ,MAAM,CAAC,GAAG,CAAC,CAAC;QAE7B,IACE,KAAK;YACL,OAAO,KAAK,KAAK,QAAQ;YACzB,KAAK;YACL,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,IAAI,KAAK,CAAC,CAAC,CAAC,KAAK,MAAM,CAAC,EAC1C;YACA,GAAG,GAAG,KAAK,CAAC,CAAC,CAAC,CAAC;YAEf,IAAI,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,IAAI,KAAK,CAAC,CAAC,CAAC,KAAK,MAAM,EAAE;gBAC5C,KAAK;oBACH,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,oBAAc,CAAC,KAAK,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,YAAM,CAAC,KAAK,EAAE,IAAI,CAAC,CAAC;aACzE;YAED,SAAS,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC;SACxB;IACH,CAAC,CAAC,CAAC;IAEH,OAAO,SAAS,CAAC;AACnB,CAAC;AAjCD,oCAiCC",
+    "sourcesContent": [
+        "import {evalExpression, filter} from './tpl';\n\nimport {Schema, PlainObject} from '../types';\n\n/**\n * 处理 Props 数据，所有带 On 结束的做一次\n *\n * xxxOn\n * xxxExpr\n *\n *\n * @param schema\n * @param data\n */\nexport default function getExprProperties(\n  schema: PlainObject,\n  data: object = {},\n  blackList: Array<string> = ['addOn']\n): PlainObject {\n  const exprProps: PlainObject = {};\n\n  Object.getOwnPropertyNames(schema).forEach(key => {\n    if (blackList && ~blackList.indexOf(key)) {\n      return;\n    }\n\n    let parts = /^(.*)(On|Expr)$/.exec(key);\n    let value: any = schema[key];\n\n    if (\n      value &&\n      typeof value === 'string' &&\n      parts &&\n      (parts[2] === 'On' || parts[2] === 'Expr')\n    ) {\n      key = parts[1];\n\n      if (parts[2] === 'On' || parts[2] === 'Expr') {\n        value =\n          parts[2] === 'On' ? evalExpression(value, data) : filter(value, data);\n      }\n\n      exprProps[key] = value;\n    }\n  });\n\n  return exprProps;\n}\n"
+    ]
+}

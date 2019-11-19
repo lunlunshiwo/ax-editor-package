@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "ButtonGroup.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/ButtonGroup.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AACA,2EAA6C;AAC7C,sCAAoC;AAEpC,kBAAe,qBAAW,CAAC;AAM3B;IAAyC,+CAAW;IAApD;;IAAsD,CAAC;IAA1C,mBAAmB;QAJ/B,kBAAQ,CAAC;YACR,IAAI,EAAE,iCAAiC;YACvC,IAAI,EAAE,cAAc;SACrB,CAAC;OACW,mBAAmB,CAAuB;IAAD,0BAAC;CAAA,AAAvD,CAAyC,qBAAW,GAAG;AAA1C,kDAAmB",
+    "sourcesContent": [
+        "import React from 'react';\nimport ButtonGroup from './Form/ButtonGroup';\nimport {Renderer} from '../factory';\n\nexport default ButtonGroup;\n\n@Renderer({\n  test: /(^|\\/)(?:button|action)\\-group$/,\n  name: 'button-group'\n})\nexport class ButtonGroupRenderer extends ButtonGroup {}\n"
+    ]
+}

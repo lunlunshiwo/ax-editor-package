@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Container.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Form/Container.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAE1B,kEAA4B;AAC5B,mEAAqC;AACrC,wDAAkD;AASlD;IAA8C,oDAAyB;IAAvE;;IAiDA,CAAC;IAhDC,6CAAU,GAAV;QACQ,IAAA,eAcQ,EAbZ,oCAAe,EACf,cAAI,EACJ,gCAAa,EACb,sBAAQ,EACR,cAAI,EACJ,sBAAQ,EACR,cAAI,EACJ,sBAAQ,EACR,0BAAU,EACV,gBAAK,EACL,mBAAe,EACf,gBAAK,EACL,kBACY,CAAC;QAEf,IAAI,CAAC,IAAI,IAAI,CAAC,QAAQ,IAAI,IAAI,IAAI,QAAQ,CAAC,EAAE;YAC3C,IAAI,KAAK,GAAQ;gBACf,KAAK,OAAA;gBACL,IAAI,EAAE,KAAK,CAAC,IAAI;gBAChB,MAAM,QAAA;aACP,CAAC;YACF,IAAI,IAAI,CAAC,KAAK,CAAC,IAAI,GAAG,IAAI,CAAC,CAAC;YAC5B,UAAU,IAAI,CAAC,KAAK,CAAC,UAAU,GAAG,UAAU,CAAC,CAAC;YAE9C,OAAO,CACL,uCACE,SAAS,EAAE,oBAAE,CACR,EAAE,eAAS,KAAK,CAAC,IAAI,IAAI,QAAQ,IAAI,QAAQ,CAAE,EAClD,aAAa,CACd,IAEA,eAAe,CACd;gBACE,QAAQ,UAAA;gBACR,IAAI,MAAA;gBACJ,QAAQ,UAAA;aACT,EACA,KAAgB,CAAC,OAAO,CAAC,WAAW,EAAE,EAAE,CAAC,EAC1C,KAAK,CACN,CACG,CACP,CAAC;SACH;QAED,OAAO,iBAAM,UAAU,WAAE,CAAC;IAC5B,CAAC;IAhDU,wBAAwB;QALpC,cAAQ,CAAC;YACR,IAAI,EAAE,WAAW;YACjB,UAAU,EAAE,KAAK;YACjB,WAAW,EAAE,KAAK;SACnB,CAAC;OACW,wBAAwB,CAiDpC;IAAD,+BAAC;CAAA,AAjDD,CAA8C,mBAAS,GAiDtD;AAjDY,4DAAwB",
+    "sourcesContent": [
+        "import React from 'react';\nimport {Renderer} from '../../factory';\nimport cx from 'classnames';\nimport Container from '../Container';\nimport FormItem, {FormControlProps} from './Item';\n\nexport interface ContainerProps extends FormControlProps {}\n\n@FormItem({\n  type: 'container',\n  strictMode: false,\n  sizeMutable: false\n})\nexport class ContainerControlRenderer extends Container<ContainerProps> {\n  renderBody(): JSX.Element | null {\n    const {\n      renderFormItems,\n      body,\n      bodyClassName,\n      controls,\n      tabs,\n      fieldSet,\n      mode,\n      formMode,\n      horizontal,\n      $path,\n      classPrefix: ns,\n      store,\n      render\n    } = this.props;\n\n    if (!body && (controls || tabs || fieldSet)) {\n      let props: any = {\n        store,\n        data: store.data,\n        render\n      };\n      mode && (props.mode = mode);\n      horizontal && (props.horizontal = horizontal);\n\n      return (\n        <div\n          className={cx(\n            `${ns}Form--${props.mode || formMode || 'normal'}`,\n            bodyClassName\n          )}\n        >\n          {renderFormItems(\n            {\n              controls,\n              tabs,\n              fieldSet\n            },\n            ($path as string).replace(/^.*form\\//, ''),\n            props\n          )}\n        </div>\n      );\n    }\n\n    return super.renderBody();\n  }\n}\n"
+    ]
+}

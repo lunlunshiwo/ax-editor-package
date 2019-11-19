@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "ButtonToolbar.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Form/ButtonToolbar.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,+BAAkD;AAClD,kEAA4B;AAO5B;IAA0C,gDAAmC;IAA7E;;IAkBA,CAAC;IAfC,qCAAM,GAAN;QACQ,IAAA,eAA0D,EAAzD,kBAAM,EAAE,wBAAS,EAAE,mBAAe,EAAE,oBAAqB,CAAC;QAEjE,OAAO,CACL,uCAAK,SAAS,EAAE,oBAAE,CAAI,EAAE,kBAAe,EAAE,SAAS,CAAC,IAChD,KAAK,CAAC,OAAO,CAAC,OAAO,CAAC;YACrB,CAAC,CAAC,OAAO,CAAC,GAAG,CAAC,UAAC,MAAM,EAAE,GAAG;gBACtB,OAAA,MAAM,CAAC,YAAU,GAAK,EAAE,MAAM,EAAE;oBAC9B,GAAG,EAAE,GAAG;iBACT,CAAC;YAFF,CAEE,CACH;YACH,CAAC,CAAC,IAAI,CACJ,CACP,CAAC;IACJ,CAAC;IAhBM,iCAAY,GAAG,EAAE,CAAC;IAiB3B,2BAAC;CAAA,AAlBD,CAA0C,eAAK,CAAC,SAAS,GAkBxD;AAlBY,oDAAoB;AAyBjC;IAA2C,iDAAoB;IAA/D;;IAAiE,CAAC;IAArD,qBAAqB;QALjC,eAAQ,CAAC;YACR,IAAI,EAAE,gBAAgB;YACtB,WAAW,EAAE,KAAK;YAClB,UAAU,EAAE,KAAK,CAAC,aAAa;SAChC,CAAC;OACW,qBAAqB,CAAgC;IAAD,4BAAC;CAAA,AAAlE,CAA2C,oBAAoB,GAAG;AAArD,sDAAqB",
+    "sourcesContent": [
+        "import React from 'react';\nimport {FormItem, FormControlProps} from './Item';\nimport cx from 'classnames';\nimport {Button} from '../../types';\n\nexport interface ButtonToolbarProps extends FormControlProps {\n  buttons?: Array<Button>;\n}\n\nexport class ButtonToolbarControl extends React.Component<ButtonToolbarProps> {\n  static defaultProps = {};\n\n  render() {\n    const {render, className, classPrefix: ns, buttons} = this.props;\n\n    return (\n      <div className={cx(`${ns}ButtonToolbar`, className)}>\n        {Array.isArray(buttons)\n          ? buttons.map((button, key) =>\n              render(`button/${key}`, button, {\n                key: key\n              })\n            )\n          : null}\n      </div>\n    );\n  }\n}\n\n@FormItem({\n  type: 'button-toolbar',\n  sizeMutable: false,\n  strictMode: false // data 变化也更新\n})\nexport class ButtonToolbarRenderer extends ButtonToolbarControl {}\n"
+    ]
+}

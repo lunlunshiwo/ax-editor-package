@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Panel.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Form/Panel.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,yCAAsD;AACtD,2DAA6B;AAE7B,kEAA4B;AAO5B;IAAmC,yCAAK;IAAxC;;IA4CA,CAAC;IA3CC,kCAAU,GAAV;QACQ,IAAA,eAaQ,EAZZ,kBAAM,EACN,oCAAe,EACf,cAAI,EACJ,gCAAa,EACb,sBAAQ,EACR,cAAI,EACJ,sBAAQ,EACR,cAAI,EACJ,sBAAQ,EACR,0BAAU,EACV,gBAAK,EACL,mBACY,CAAC;QAEf,IAAI,CAAC,IAAI,IAAI,CAAC,QAAQ,IAAI,IAAI,IAAI,QAAQ,CAAC,EAAE;YAC3C,IAAI,KAAK,GAAQ,EAAE,CAAC;YACpB,IAAI,IAAI,CAAC,KAAK,CAAC,IAAI,GAAG,IAAI,CAAC,CAAC;YAC5B,UAAU,IAAI,CAAC,KAAK,CAAC,UAAU,GAAG,UAAU,CAAC,CAAC;YAE9C,OAAO,CACL,uCACE,SAAS,EAAE,oBAAE,CACR,EAAE,eAAS,KAAK,CAAC,IAAI,IAAI,QAAQ,IAAI,QAAQ,CAAE,EAClD,aAAa,CACd,IAEA,eAAe,CACd;gBACE,QAAQ,UAAA;gBACR,IAAI,MAAA;gBACJ,QAAQ,UAAA;aACT,EACA,KAAgB,CAAC,OAAO,CAAC,WAAW,EAAE,EAAE,CAAC,EAC1C,KAAK,CACN,CACG,CACP,CAAC;SACH;QAED,OAAO,iBAAM,UAAU,WAAE,CAAC;IAC5B,CAAC;IA3CU,aAAa;QALzB,kBAAQ,CAAC;YACR,IAAI,EAAE,gDAAgD;YACtD,MAAM,EAAE,CAAC,GAAG;YACZ,IAAI,EAAE,eAAe;SACtB,CAAC;OACW,aAAa,CA4CzB;IAAD,oBAAC;CAAA,AA5CD,CAAmC,eAAK,GA4CvC;AA5CY,sCAAa",
+    "sourcesContent": [
+        "import React from 'react';\nimport {Renderer, RendererProps} from '../../factory';\nimport Panel from '../Panel';\nimport {Schema} from '../../types';\nimport cx from 'classnames';\n\n@Renderer({\n  test: /(^|\\/)form(?:\\/.+)?\\/control\\/(?:\\d+\\/)?panel$/,\n  weight: -100,\n  name: 'panel-control'\n})\nexport class PanelRenderer extends Panel {\n  renderBody(): JSX.Element | null {\n    const {\n      render,\n      renderFormItems,\n      body,\n      bodyClassName,\n      controls,\n      tabs,\n      fieldSet,\n      mode,\n      formMode,\n      horizontal,\n      $path,\n      classPrefix: ns\n    } = this.props;\n\n    if (!body && (controls || tabs || fieldSet)) {\n      let props: any = {};\n      mode && (props.mode = mode);\n      horizontal && (props.horizontal = horizontal);\n\n      return (\n        <div\n          className={cx(\n            `${ns}Form--${props.mode || formMode || 'normal'}`,\n            bodyClassName\n          )}\n        >\n          {renderFormItems(\n            {\n              controls,\n              tabs,\n              fieldSet\n            },\n            ($path as string).replace(/^.*form\\//, ''),\n            props\n          )}\n        </div>\n      );\n    }\n\n    return super.renderBody();\n  }\n}\n"
+    ]
+}

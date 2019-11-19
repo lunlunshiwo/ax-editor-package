@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Color.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Form/Color.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,+BAAkD;AAClD,kEAA4B;AAC5B,qFAAuD;AAcvD;IAA0C,wCAGzC;IAHD;QAAA,qEAqBC;QAbC,WAAK,GAAsB;YACzB,IAAI,EAAE,KAAK;SACZ,CAAC;;IAWJ,CAAC;IATC,6BAAM,GAAN;QACE,IAAM,eAAkD,EAAjD,wBAAS,EAAE,mBAAe,EAAE,uDAAqB,CAAC;QAEzD,OAAO,CACL,uCAAK,SAAS,EAAE,oBAAE,CAAI,EAAE,iBAAc,EAAE,SAAS,CAAC;YAChD,8BAAC,qBAAW,qBAAC,WAAW,EAAE,EAAE,IAAM,IAAI,EAAI,CACtC,CACP,CAAC;IACJ,CAAC;IAhBM,yBAAY,GAAwB;QACzC,MAAM,EAAE,KAAK;QACb,SAAS,EAAE,IAAI;KAChB,CAAC;IAcJ,mBAAC;CAAA,AArBD,CAA0C,eAAK,CAAC,aAAa,GAqB5D;kBArBoB,YAAY;AA0BjC;IAA0C,gDAAY;IAAtD;;IAAwD,CAAC;IAA5C,oBAAoB;QAHhC,eAAQ,CAAC;YACR,IAAI,EAAE,OAAO;SACd,CAAC;OACW,oBAAoB,CAAwB;IAAD,2BAAC;CAAA,AAAzD,CAA0C,YAAY,GAAG;AAA5C,oDAAoB",
+    "sourcesContent": [
+        "import React from 'react';\nimport {FormItem, FormControlProps} from './Item';\nimport cx from 'classnames';\nimport ColorPicker from '../../components/ColorPicker';\n\nexport interface ColorProps extends FormControlProps {\n  placeholder?: string;\n  format?: string;\n  timeConstrainst?: object;\n  closeOnSelect?: boolean;\n  presetColors?: string[];\n}\n\nexport interface ColorControlState {\n  open: boolean;\n}\n\nexport default class ColorControl extends React.PureComponent<\n  ColorProps,\n  ColorControlState\n> {\n  static defaultProps: Partial<ColorProps> = {\n    format: 'hex',\n    clearable: true\n  };\n  state: ColorControlState = {\n    open: false\n  };\n\n  render() {\n    const {className, classPrefix: ns, ...rest} = this.props;\n\n    return (\n      <div className={cx(`${ns}ColorControl`, className)}>\n        <ColorPicker classPrefix={ns} {...rest} />\n      </div>\n    );\n  }\n}\n\n@FormItem({\n  type: 'color'\n})\nexport class ColorControlRenderer extends ColorControl {}\n"
+    ]
+}

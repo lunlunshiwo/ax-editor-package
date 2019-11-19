@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Container.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Container.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,sCAAmD;AASnD;IAA0C,qCAGzC;IAHD;;IAgCA,CAAC;IAvBC,8BAAU,GAAV;QACQ,IAAA,eAAoE,EAAnE,sBAAQ,EAAE,cAAI,EAAE,kBAAM,EAAE,kBAAc,EAAE,gCAA2B,CAAC;QAE3E,OAAO,CACL,uCAAK,SAAS,EAAE,EAAE,CAAC,gBAAgB,EAAE,aAAa,CAAC,IAChD,QAAQ;YACP,CAAC,CAAC,OAAO,QAAQ,KAAK,UAAU;gBAC9B,CAAC,CAAE,QAAQ,CAAC,IAAI,CAAC,KAAK,CAAiB;gBACvC,CAAC,CAAE,QAAwB;YAC7B,CAAC,CAAC,IAAI;gBACN,CAAC,CAAE,MAAM,CAAC,MAAM,EAAE,IAAI,CAAiB;gBACvC,CAAC,CAAC,IAAI,CACJ,CACP,CAAC;IACJ,CAAC;IAED,0BAAM,GAAN;QACQ,IAAA,eAA8C,EAA7C,wBAAS,EAAE,cAAI,EAAE,kBAA4B,CAAC;QAErD,OAAO,CACL,uCAAK,SAAS,EAAE,EAAE,CAAC,WAAW,EAAE,SAAS,CAAC,IAAG,IAAI,CAAC,UAAU,EAAE,CAAO,CACtE,CAAC;IACJ,CAAC;IA3BM,mBAAS,GAAkB,CAAC,MAAM,EAAE,WAAW,CAAC,CAAC;IACjD,sBAAY,GAAG;QACpB,SAAS,EAAE,EAAE;KACd,CAAC;IAyBJ,gBAAC;CAAA,AAhCD,CAA0C,eAAK,CAAC,SAAS,GAgCxD;kBAhCoB,SAAS;AAsC9B;IAAuC,6CAAa;IAApD;;IAAsD,CAAC;IAA1C,iBAAiB;QAJ7B,kBAAQ,CAAC;YACR,IAAI,EAAE,kBAAkB;YACxB,IAAI,EAAE,WAAW;SAClB,CAAC;OACW,iBAAiB,CAAyB;IAAD,wBAAC;CAAA,AAAvD,CAAuC,SAAS,GAAO;AAA1C,8CAAiB",
+    "sourcesContent": [
+        "import React from 'react';\nimport {Renderer, RendererProps} from '../factory';\nimport {SchemaNode} from '../types';\n\nexport interface ContainerProps extends RendererProps {\n  body?: SchemaNode;\n  children?: (props: any) => React.ReactNode;\n  className?: string;\n}\n\nexport default class Container<T> extends React.Component<\n  ContainerProps & T,\n  object\n> {\n  static propsList: Array<string> = ['body', 'className'];\n  static defaultProps = {\n    className: ''\n  };\n\n  renderBody(): JSX.Element | null {\n    const {children, body, render, classnames: cx, bodyClassName} = this.props;\n\n    return (\n      <div className={cx('Container-body', bodyClassName)}>\n        {children\n          ? typeof children === 'function'\n            ? (children(this.props) as JSX.Element)\n            : (children as JSX.Element)\n          : body\n          ? (render('body', body) as JSX.Element)\n          : null}\n      </div>\n    );\n  }\n\n  render() {\n    const {className, size, classnames: cx} = this.props;\n\n    return (\n      <div className={cx('Container', className)}>{this.renderBody()}</div>\n    );\n  }\n}\n\n@Renderer({\n  test: /(^|\\/)container$/,\n  name: 'container'\n})\nexport class ContainerRenderer extends Container<{}> {}\n"
+    ]
+}

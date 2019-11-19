@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "cxd.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/themes/cxd.ts"
+    ],
+    "names": [],
+    "mappings": ";;AAAA,kCAA+B;AAE/B,qBAAqB;AACrB,aAAK,CAAC,KAAK,EAAE;IACX,WAAW,EAAE,MAAM;IAEnB,SAAS,EAAE;QACT,IAAI,EAAE;YACJ,UAAU,EAAE;gBACV,SAAS,EAAE,IAAI;aAChB;SACF;QAED,UAAU,EAAE;YACV,UAAU,EAAE,CAAC;YACb,aAAa,EAAE,KAAK;SACrB;QAED,QAAQ,EAAE;YACR,WAAW,EAAE,KAAK;SACnB;QAED,MAAM,EAAE;YACN,IAAI,EAAE,4BAA4B;YAClC,SAAS,EAAE,OAAO;SACnB;QAED,IAAI,EAAE;YACJ,IAAI,EAAE,MAAM;SACb;QAED,cAAc,EAAE;YACd,IAAI,EAAE,MAAM;SACb;QAED,eAAe,EAAE;YACf,SAAS,EAAE,IAAI;YACf,SAAS,EAAE,IAAI;SAChB;QAED,MAAM,EAAE;YACN,GAAG,EAAE;gBACH,OAAO,EAAE,sBAAsB;gBAC/B,OAAO,EAAE,sBAAsB;gBAC/B,IAAI,EAAE,qBAAqB;gBAC3B,KAAK,EAAE,sBAAsB;gBAC7B,QAAQ,EAAE,sBAAsB;aACjC;YACD,QAAQ,EAAE;gBACR,OAAO,EAAE,IAAI;gBACb,OAAO,EAAE,KAAK;gBACd,IAAI,EAAE,IAAI;gBACV,KAAK,EAAE,KAAK;gBACZ,QAAQ,EAAE,KAAK;aAChB;SACF;KACF;CACF,CAAC,CAAC",
+    "sourcesContent": [
+        "import {theme} from '../theme';\n\n// yunshe.design 百度云舍\ntheme('cxd', {\n  classPrefix: 'cxd-',\n\n  renderers: {\n    form: {\n      horizontal: {\n        leftFixed: true\n      }\n    },\n\n    pagination: {\n      maxButtons: 9,\n      showPageInput: false\n    },\n\n    fieldset: {\n      collapsable: false\n    },\n\n    remark: {\n      icon: 'iconfont icon-warning-mark',\n      placement: 'right'\n    },\n\n    tabs: {\n      mode: 'line'\n    },\n\n    'tabs-control': {\n      mode: 'line'\n    },\n\n    'range-control': {\n      showInput: true,\n      clearable: true\n    },\n\n    status: {\n      map: {\n        success: 'Status-icon--success',\n        pending: 'Status-icon--rolling',\n        fail: 'Status-icon--danger',\n        queue: 'Status-icon--warning',\n        schedule: 'Status-icon--primary'\n      },\n      labelMap: {\n        success: '成功',\n        pending: '运行中',\n        fail: '失败',\n        queue: '排队中',\n        schedule: '调度中'\n      }\n    }\n  }\n});\n"
+    ]
+}

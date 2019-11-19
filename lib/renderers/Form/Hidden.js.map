@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Hidden.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/renderers/Form/Hidden.tsx"
+    ],
+    "names": [],
+    "mappings": ";;;AAAA,wDAA0B;AAC1B,+BAAkD;AAElD;IAA2C,yCAG1C;IAHD;;IAOA,CAAC;IAHC,8BAAM,GAAN;QACE,OAAO,IAAI,CAAC;IACd,CAAC;IACH,oBAAC;AAAD,CAAC,AAPD,CAA2C,eAAK,CAAC,SAAS,GAOzD;;AAOD;IAA2C,iDAAa;IAAxD;;IAA0D,CAAC;IAA9C,qBAAqB;QALjC,eAAQ,CAAC;YACR,IAAI,EAAE,QAAQ;YACd,IAAI,EAAE,KAAK;YACX,WAAW,EAAE,KAAK;SACnB,CAAC;OACW,qBAAqB,CAAyB;IAAD,4BAAC;CAAA,AAA3D,CAA2C,aAAa,GAAG;AAA9C,sDAAqB",
+    "sourcesContent": [
+        "import React from 'react';\nimport {FormItem, FormControlProps} from './Item';\n\nexport default class HiddenControl extends React.Component<\n  FormControlProps,\n  any\n> {\n  render() {\n    return null;\n  }\n}\n\n@FormItem({\n  type: 'hidden',\n  wrap: false,\n  sizeMutable: false\n})\nexport class HiddenControlRenderer extends HiddenControl {}\n"
+    ]
+}

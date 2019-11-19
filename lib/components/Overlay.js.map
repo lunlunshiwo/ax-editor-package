@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "Overlay.js",
+    "sourceRoot": "",
+    "sources": [
+        "/src/components/Overlay.tsx"
+    ],
+    "names": [],
+    "mappings": ";AAAA;;;;GAIG;;;AAEH,iDAAgE;AAChE,uCAAsC;AACtC,wDAA0B;AAC1B,oCAA4E;AAE5E,yBAAQ,CAAC,SAAS,CAAC,SAAS,GAAG,wBAAW,CAAC,SAAS,CAAC,SAAS,GAAG,cAAM,OAAA,IAAI,EAAJ,CAAI,CAAC;AAE5E,yBAAQ,CAAC,SAAS,CAAC,cAAc,GAAG,UAAS,MAAW;IACtD,IAAI,CAAC,WAAW,GAAG,MAAM,CAAC;IAE1B,IAAI,CAAC,MAAM,EAAE;QACX,OAAO,IAAI,CAAC,QAAQ,CAAC;YACnB,YAAY,EAAE,CAAC;YACf,WAAW,EAAE,CAAC;YACd,eAAe,EAAE,IAAI;YACrB,cAAc,EAAE,IAAI;SACrB,CAAC,CAAC;KACJ;IAED,IAAM,OAAO,GAAG,uBAAW,CAAC,IAAI,CAAC,CAAC;IAClC,IAAM,SAAS,GAAG,kBAAY,CAC5B,IAAI,CAAC,KAAK,CAAC,SAAS,EACpB,mBAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CACzB,CAAC;IAEF,IAAI,CAAC,QAAQ,CACX,uBAAiB,CACf,IAAI,CAAC,KAAK,CAAC,SAAS,EACpB,OAAO,EACP,MAAM,EACN,SAAS,EACT,IAAI,CAAC,KAAK,CAAC,gBAAgB,CAC5B,CACF,CAAC;AACJ,CAAC,CAAC;AAUF;IAAqC,mCAA6B;IAIhE,iBAAY,KAAmB;eAC7B,kBAAM,KAAY,CAAC;IACrB,CAAC;IAED,wBAAM,GAAN;QACE,OAAO,8BAAC,wBAAW,uBAAK,IAAI,CAAC,KAAY,EAAI,CAAC;IAChD,CAAC;IATM,oBAAY,GAAG;QACpB,SAAS,EAAE,MAAM;KAClB,CAAC;IAQJ,cAAC;CAAA,AAXD,CAAqC,eAAK,CAAC,SAAS,GAWnD;kBAXoB,OAAO",
+    "sourcesContent": [
+        "/**\n * @file Overlay\n * @description\n * @author fex\n */\n\nimport {Position, Overlay as BaseOverlay} from 'react-overlays';\nimport {findDOMNode} from 'react-dom';\nimport React from 'react';\nimport {calculatePosition, getContainer, ownerDocument} from '../utils/dom';\n\nPosition.propTypes.placement = BaseOverlay.propTypes.placement = () => null;\n\nPosition.prototype.updatePosition = function(target: any) {\n  this._lastTarget = target;\n\n  if (!target) {\n    return this.setState({\n      positionLeft: 0,\n      positionTop: 0,\n      arrowOffsetLeft: null,\n      arrowOffsetTop: null\n    });\n  }\n\n  const overlay = findDOMNode(this);\n  const container = getContainer(\n    this.props.container,\n    ownerDocument(this).body\n  );\n\n  this.setState(\n    calculatePosition(\n      this.props.placement,\n      overlay,\n      target,\n      container,\n      this.props.containerPadding\n    )\n  );\n};\n\ninterface OverlayProps {\n  placement?: string;\n  show?: boolean;\n  rootClose?: boolean;\n  onHide?(props: any, ...args: any[]): any;\n  container?: React.ReactNode | Function;\n  target?: React.ReactNode | Function;\n}\nexport default class Overlay extends React.Component<OverlayProps> {\n  static defaultProps = {\n    placement: 'auto'\n  };\n  constructor(props: OverlayProps) {\n    super(props as any);\n  }\n\n  render() {\n    return <BaseOverlay {...this.props as any} />;\n  }\n}\n"
+    ]
+}
